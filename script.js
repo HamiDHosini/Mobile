@@ -1,7 +1,7 @@
 let result = document.getElementById('result');
 let btn = document.querySelector('.Search-btn');
 let input = document.getElementById("IMEI");
-const div = (id , name , username,email,phone,photo) => {
+const div = (id , name , username, email, phone, photo) => {
     let element = `<div class="card my-3 shadow">
     <div class="card-body">
       <h5 class="card-title">id : ${id}</h5>
@@ -19,7 +19,7 @@ const div = (id , name , username,email,phone,photo) => {
       </li>
     </ul>
     <div class="card-body">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal${id}">
       More
     </button>
     </div>
@@ -27,11 +27,11 @@ const div = (id , name , username,email,phone,photo) => {
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal${id}" tabindex="-1" aria-labelledby="exampleModalLabel${id}" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">photo</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel${id}">photo</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -46,6 +46,7 @@ const div = (id , name , username,email,phone,photo) => {
 </div>`;
     return element;
   };
+
 btn.addEventListener('click' , ()=>{
     input.value = "";
     fetch('https://jsonplaceholder.typicode.com/users/1')
@@ -64,48 +65,3 @@ fetch('https://jsonplaceholder.typicode.com/users')
     console.log(response[i].address["city"])
     }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// .then((response) => response.json())
-// .then((response) =>{
-//     result.innerHTML += div(response.id , response.userId , response.title);
-//     return fetch('https://jsonplaceholder.typicode.com/todos/3')
-// })
-// .then((response) => response.json())
-// .then((response) =>{
-//     result.innerHTML += div(response.id , response.userId , response.title);
-//     return fetch('https://jsonplaceholder.typicode.com/todos/4')
-// })
-// .then((response) => response.json())
-// .then((response) =>{
-//     result.innerHTML += div(response.id , response.userId , response.title);
-//     return fetch('https://jsonplaceholder.typicode.com/todos/5')
-// })
-
