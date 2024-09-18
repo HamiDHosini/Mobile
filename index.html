@@ -1,158 +1,209 @@
 <!doctype html>
-<html lang="en">
-    <head>
-        <title>Title</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+<html lang="fa" dir="rtl">
+<head>
+    <title>موبایل سنج</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 20px;
+            padding-top: 20px;
+        }
 
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    </head>
+        .card-container::-webkit-scrollbar {
+            display: none;
+        }
 
-    <body>
-        <header>
-            <!-- place navbar here -->
-            <nav class="navbar navbar-dark bg-dark">
-                <div class="container">
-                    <a class="navbar-brand" href="#">Navbar</a>
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasNavbar"
-                        aria-controls="offcanvasNavbar"
-                    >
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div
-                        class="offcanvas bg-dark offcanvas-end"
-                        tabindex="-1"
-                        id="offcanvasNavbar"
-                        aria-labelledby="offcanvasNavbarLabel"
-                    >
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title text-light" id="offcanvasNavbarLabel">
-                                Offcanvas
-                            </h5>
-                            <button
-                                type="button"
-                                class="btn-close text-reset"
-                                data-bs-dismiss="offcanvas"
-                                aria-label="Close"
-                            ></button>
-                        </div>
-                        <div class="offcanvas-body">
-                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link active"
-                                        aria-current="page"
-                                        href="#"
-                                        >Home</a
-                                    >
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Link</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a
-                                        class="nav-link dropdown-toggle"
-                                        href="#"
-                                        id="dropdownId"
-                                        data-bs-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                        >Dropdown</a
-                                    >
-                                    <div
-                                        class="dropdown-menu"
-                                        aria-labelledby="dropdownId"
-                                    >
-                                        <a class="dropdown-item" href="#"
-                                            >Action 1</a
-                                        >
-                                        <a class="dropdown-item" href="#"
-                                            >Action 2</a
-                                        >
-                                    </div>
-                                </li>
-                            </ul>
-                            <form class="d-flex">
-                                <input
-                                    class="form-control me-2"
-                                    type="search"
-                                    placeholder="Search"
-                                    aria-label="Search"
-                                />
-                                <button class="btn btn-outline-success" type="submit">
-                                    Search
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+        .custom-card {
+            flex: 0 0 auto;
+            width: 300px;
+            box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+        }
+
+        @media (min-width: 768px) {
+            .card-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+                gap: 20px;
+                overflow-x: hidden;
+            }
+            .custom-card {
+                flex: auto;
+                width: 100%;
+            }
+        }
+
+        .custom-card-body {
+            padding: 20px;
+        }
+
+        .custom-card-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-card-title .bi {
+            margin-right: 10px;
+            color: #007bff;
+        }
+
+        .custom-card-text {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .custom-card-footer {
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .btn-primary-custom {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 20px;
+            padding: 10px 20px;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-search-custom {
+            background-color: #007bff;
+            border: none;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-top-left-radius: 10px !important;
+            border-bottom-left-radius: 10px !important;
+            padding: 10px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .input-group-text{
+            border-top-right-radius: 10px !important;
+            border-bottom-right-radius: 10px !important;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .btn-search-custom:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .btn-search-custom .bi {
+            font-size: 1.2rem;
+        }
+
+        .modal-content-custom {
+            border-radius: 12px;
+        }
+
+        .error-message {
+            color: #dc3545;
+            margin-top: 10px;
+        }
+
+        .error-message.yellow {
+            color: #ffc107;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-house-door"></i> موبایل سنج</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas bg-dark offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title text-light" id="offcanvasNavbarLabel">موبایل سنج</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="بستن"></button>
                 </div>
-            </nav>
-            <section>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-8">
-                            <div>
-                                <h1>lorem</h1>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni dolorum iure beatae corporis repellat a voluptatum, illo nobis in officiis ullam, repellendus neque fugiat id ea odit! Placeat, itaque enim.</p>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#"><i class="bi bi-house-door"></i> خانه</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-link-45deg"></i> لینک</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-list"></i> کشویی</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <a class="dropdown-item" href="#"><i class="bi bi-gear"></i> عمل 1</a>
+                                <a class="dropdown-item" href="#"><i class="bi bi-tools"></i> عمل 2</a>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
-            </section>
-        </header>
-        <main>
-            <section class="my-4">
-                <div class="container">
-                    <div class="row gy-4">
-                        <div class="col-lg-6">
-                            <div class="position-sticky top-0">
-                                <div class="input-group flex-nowrap">
-                                    <span class="input-group-text" id="addon-wrapping">IMEI</span>
-                                    <input type="text" class="form-control" id="IMEI" placeholder="86 , 35 ..." aria-label="IMEI" aria-describedby="addon-wrapping">
-                                    <button class="btn btn-outline-secondary Search-btn" type="button" id="button-addon2">Search</button>
-                                  </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div id="result" class="">
+            </div>
+        </div>
+    </nav>
+</header>
 
-                            </div>
-                        </div>
-                    </div>
+<main>
+    <section class="container my-4">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group input-group-custom">
+                    <span class="input-group-text" id="addon-wrapping">Name<i class="bi bi-barcode"></i></span>
+                    <input type="text" class="form-control form-control-custom" id="IMEI" placeholder="نام فروشنده" aria-label="IMEI" aria-describedby="addon-wrapping">
+                    <button class="btn btn-search-custom" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
                 </div>
-            </section>
-        </main>
-        <footer>
-            <!-- place footer here -->
-        </footer>
+                <div id="error-message" class="error-message d-none"></div>
+            </div>
+        </div>
 
-        <!-- Bootstrap JavaScript Libraries -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
+        <div id="result" class="card-container"></div>
+    </section>
+</main>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
-        <script src="./script.js"></script>
-    </body>
+<div id="loader" class="d-none text-center">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">در حال بارگذاری...</span>
+    </div>
+</div>
+
+<div class="modal fade" id="noResultsModal" tabindex="-1" aria-labelledby="noResultsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-content-custom">
+            <div class="modal-header">
+                <h5 class="modal-title" id="noResultsModalLabel"><i class="bi bi-x-circle"></i> نتیجه‌ای یافت نشد</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+            </div>
+            <div class="modal-body">
+                نامی که وارد کرده‌اید در سوابق وجود ندارد.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+<script src="./script.js"></script>
+</body>
 </html>
