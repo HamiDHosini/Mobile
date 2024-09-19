@@ -1,43 +1,154 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <title>موبایل سنج</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-          crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <style>
+        @font-face {
+    font-family: vazir;
+    src: url('./Font/vazir-font/Vazir-Medium.ttf');
+}
+@font-face {
+    font-family: lalezar;
+    src: url('./Font/Lalezar-Font/TTF/Lalezar-Regular.ttf');
+}
         body {
             background-color: #f8f9fa;
+            margin: 0;
+            font-family: vazir;
         }
+        h1,h2,h3,h4,h5,button,a,label{
+            font-family: lalezar;
+        }
+
+        .header {
+            position: relative;
+            background: url('./image/Phone.jpeg') no-repeat center center;
+            background-size: cover;
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+            overflow: hidden;
+            border-bottom: 5px solid #007bff;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .header h1 {
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        .header p {
+            font-size: 1rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .header-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-30px);
+            }
+
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .header-content a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 1.3rem;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content a:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .header-content .tagline {
+            font-size: 1.2rem;
+            color: #dcdcdc;
+            margin-top: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
         .card-container {
             display: flex;
             flex-wrap: nowrap;
             overflow-x: auto;
             gap: 20px;
             padding-top: 20px;
+            padding-bottom: 20px;
         }
 
         .card-container::-webkit-scrollbar {
-            display: none;
+            display:ruby-text-container;
         }
 
         .custom-card {
             flex: 0 0 auto;
             width: 300px;
-            box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+            box-shadow: rgba(136, 165, 191, 0.48) 0px 2px 6px 0px,
+                rgba(255, 255, 255, 0.8) 0px 2px 5px 0px;
+                
         }
 
         @media (min-width: 768px) {
             .card-container {
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+                grid-template-columns: repeat(2, 1fr);
                 gap: 20px;
                 overflow-x: hidden;
             }
+
             .custom-card {
                 flex: auto;
                 width: 100%;
@@ -74,18 +185,22 @@
         }
 
         .btn-primary-custom {
-            background-color: #007bff;
-            border-color: #007bff;
-            border-radius: 20px;
-            padding: 10px 20px;
+            padding: 7px 10px;
+            font-size: 1.3rem;
             color: #fff;
-            font-weight: bold;
+            background-color: #007bff;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             text-transform: uppercase;
         }
 
+
         .btn-primary-custom:hover {
             background-color: #0056b3;
-            border-color: #004085;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
 
         .btn-search-custom {
@@ -100,12 +215,14 @@
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
         }
-        .input-group-text{
+
+        .input-group-text {
             border-top-right-radius: 10px !important;
             border-bottom-right-radius: 10px !important;
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
+
         .btn-search-custom:hover {
             background-color: #0056b3;
             transform: scale(1.05);
@@ -127,83 +244,317 @@
         .error-message.yellow {
             color: #ffc107;
         }
+
+        .feature-card {
+            border-radius: 12px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            padding: 20px;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .card-bg-primary {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        .card-bg-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .card-bg-dark {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .card-bg-light {
+            background-color: #adadad55;
+            color: black;
+        }
+        .card-custom-2 {
+    margin-top: 50px;
+    border-radius: 15px;
+    border: 1px solid #e0e0e0;
+    background-color: #f9f9f9;
+}
+
+.card-custom-2-body {
+    padding: 2rem;
+}
+
+.card-custom-2-body h2 {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.form-label-custom {
+    font-weight: 500;
+    color: #333;
+}
+
+.form-control-custom {
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.form-control-custom:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+.btn-custom {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 10px;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.btn-custom:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+      
     </style>
 </head>
 
 <body>
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#"><i class="bi bi-house-door"></i> موبایل سنج</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="offcanvas bg-dark offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-light" id="offcanvasNavbarLabel">موبایل سنج</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="بستن"></button>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">                        <i class="bi bi-phone"></i>                     موبایل سنج</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas bg-dark w-75 offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title text-light" id="offcanvasNavbarLabel">
+                            موبایل سنج
+                        </h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="بستن"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-house-door"></i>
+                                    خانه</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#features"><i class="bi bi-link-45deg"></i> درباره</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#"><i class="bi bi-house-door"></i> خانه</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-link-45deg"></i> لینک</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-list"></i> کشویی</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownId">
-                                <a class="dropdown-item" href="#"><i class="bi bi-gear"></i> عمل 1</a>
-                                <a class="dropdown-item" href="#"><i class="bi bi-tools"></i> عمل 2</a>
+            </div>
+        </nav>
+
+        <section>
+            <div class="header">
+                <div class="header-content">
+                    <div class="header-icon">
+                        <i class="bi bi-phone"></i> 
+                    </div>
+                    <h1 class="borde">موبایل سنج</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                    <a href="#">button</a>
+                    <div class="tagline">Lorem ipsum dolor sit amet.</div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <main>
+        <div class="container my-4">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active fw-bold" id="hamid-tab" data-bs-toggle="tab" href="#hamid" role="tab"
+                        aria-controls="hamid" aria-selected="true">جستجو</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link fw-bold" id="walid-tab" data-bs-toggle="tab" href="#walid" role="tab"
+                        aria-controls="walid" aria-selected="false">ثبت نام</a>
+                </li>
+            </ul>
+            </div>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="hamid" role="tabpanel" aria-labelledby="hamid-tab">
+                    <section class=" my-4">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="input-group input-group-custom">
+                                        <span class="input-group-text" id="card-count">تعداد موبایل 0<i class="bi bi-barcode"></i></span>
+                                        <input type="text" class="form-control form-control-custom" id="IMEI" placeholder="نام فروشنده" aria-label="IMEI" aria-describedby="addon-wrapping" />
+                                        <button class="btn btn-search-custom" type="button" id="button-addon2">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                    <div id="alert-container"></div>
+                                </div>
+                                <div class="col-12">
+                            <div id="result" class="card-container"></div>
+
+                                </div>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </section>
+                </div>
+                <div class="tab-pane fade" id="walid" role="tabpanel" aria-labelledby="walid-tab">
+                    <section class="my-4">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="card card-custom-2 shadow-lg border-0 rounded">
+                                        <div class="card-body card-custom-2-body p-4">
+                                            <h2 class="text-center mb-4">فرم ثبت نام</h2>
+                                            <form>
+                                                <div class="mb-3">
+                                                    <label for="name" class="form-label form-label-custom">اسم</label>
+                                                    <input type="text" class="form-control form-control-custom" id="name" placeholder="اسم خود را وارد کنید">
+                                                </div>
+                        
+                                                <div class="mb-3">
+                                                    <label for="faName" class="form-label form-label-custom">نام پدر</label>
+                                                    <input type="text" class="form-control form-control-custom" id="faName" placeholder="نام پدر خود را وارد کنید">
+                                                </div>
+                        
+                                                <div class="mb-3">
+                                                    <label for="model" class="form-label form-label-custom">مدل موبایل</label>
+                                                    <input type="text" class="form-control form-control-custom" id="model" placeholder="مدل موبایل را وارد کنید">
+                                                </div>
+                        
+                                                <div class="mb-3">
+                                                    <label for="serial1" class="form-label form-label-custom">سریال نمبر ۱</label>
+                                                    <input type="text" class="form-control form-control-custom" id="serial1" placeholder="سریال نمبر ۱ را وارد کنید">
+                                                </div>
+                        
+                                                <div class="mb-3">
+                                                    <label for="serial2" class="form-label form-label-custom">سریال نمبر ۲</label>
+                                                    <input type="text" class="form-control form-control-custom" id="serial2" placeholder="سریال نمبر ۲ را وارد کنید">
+                                                </div>
+                        
+                                                <div class="mb-3">
+                                                    <label for="idNumber" class="form-label form-label-custom">نمبر تذکره</label>
+                                                    <input type="text" class="form-control form-control-custom" id="idNumber" placeholder="نمبر تذکره را وارد کنید">
+                                                </div>
+                        
+                                                <div class="mb-3">
+                                                    <label for="idPhoto" class="form-label form-label-custom">عکس تذکره</label>
+                                                    <input type="file" class="form-control form-control-custom" id="idPhoto">
+                                                </div>
+                        
+                                                <div class="mb-3">
+                                                    <label for="personPhoto" class="form-label form-label-custom">عکس شخص</label>
+                                                    <input type="file" class="form-control form-control-custom" id="personPhoto">
+                                                </div>
+                        
+                                                <div class="mb-3">
+                                                    <label for="contactNumber" class="form-label form-label-custom">نمبر تماس</label>
+                                                    <input type="text" class="form-control form-control-custom" id="contactNumber" placeholder="نمبر تماس را وارد کنید">
+                                                </div>
+                        
+                                                <div class="mb-3">
+                                                    <label for="warrantyContact" class="form-label form-label-custom">نمبر تماس ضمانتی</label>
+                                                    <input type="text" class="form-control form-control-custom" id="warrantyContact" placeholder="نمبر تماس ضمانتی را وارد کنید">
+                                                </div>
+                        
+                                                <div class="mb-3">
+                                                    <label for="currentAddress" class="form-label form-label-custom">سکونت فعلی (ناحیه کوچه)</label>
+                                                    <input type="text" class="form-control form-control-custom" id="currentAddress" placeholder="سکونت فعلی را وارد کنید">
+                                                </div>
+                        
+                                                <div class="mb-3">
+                                                    <label for="purchasePrice" class="form-label form-label-custom">قیمت خرید</label>
+                                                    <input type="number" class="form-control form-control-custom" id="purchasePrice" placeholder="قیمت خرید را وارد کنید">
+                                                </div>
+                        
+                                                <div class="mb-3">
+                                                    <label for="purchaseDate" class="form-label form-label-custom">تاریخ خرید</label>
+                                                    <input type="date" class="form-control form-control-custom" id="purchaseDate">
+                                                </div>
+                        
+                                                <button type="submit" class="btn btn-custom w-100">ثبت</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+            </div>
+
+
+        <div id="loader" class="d-none text-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">در حال بارگذاری...</span>
+            </div>
+        </div>
+
+        <section class="container my-5" id="features">
+            <h2 class="text-center mb-4">قابلیت‌های سایت موبایل سنج</h2>
+            <div class="row justify-content-center g-4">
+                <div class="col-md-4 col-lg-3 d-flex">
+                    <div class="feature-card card-bg-secondary w-100">
+                        <i class="bi bi-search feature-icon"></i>
+                        <h5>جستجو و نمایش مشخصات کاربران</h5>
+                        <p>قابلیت جستجوی کاربران و نمایش اطلاعات کامل آنها.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-3 d-flex">
+                    <div class="feature-card card-bg-dark w-100">
+                        <i class="bi bi-person-plus feature-icon"></i>
+                        <h5>ثبت کاربر جدید</h5>
+                        <p>افزودن کاربران جدید و ذخیره اطلاعات آنها در پایگاه داده.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-3 d-flex">
+                    <div class="feature-card card-bg-primary w-100">
+                        <i class="bi bi-people feature-icon"></i>
+                        <h5>تعداد کاربران ثبت شده</h5>
+                        <p>نمایش تعداد کل کاربران ثبت شده در سایت.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-3 d-flex">
+                    <div class="feature-card card-bg-light w-100">
+                        <i class="bi bi-arrow-up-circle feature-icon"></i>
+                        <h5>به روز رسانی اطلاعات</h5>
+                        <p>به روز رسانی و ویرایش اطلاعات کاربران به سادگی.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </section>
+    </main>
 
-<main>
-    <section class="container my-4">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="input-group input-group-custom">
-                    <span class="input-group-text" id="addon-wrapping">Name<i class="bi bi-barcode"></i></span>
-                    <input type="text" class="form-control form-control-custom" id="IMEI" placeholder="نام فروشنده" aria-label="IMEI" aria-describedby="addon-wrapping">
-                    <button class="btn btn-search-custom" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
-                </div>
-                <div id="error-message" class="error-message d-none"></div>
-            </div>
-        </div>
-
-        <div id="result" class="card-container"></div>
-    </section>
-</main>
-
-<div id="loader" class="d-none text-center">
-    <div class="spinner-border" role="status">
-        <span class="visually-hidden">در حال بارگذاری...</span>
-    </div>
-</div>
-
-<div class="modal fade" id="noResultsModal" tabindex="-1" aria-labelledby="noResultsModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content modal-content-custom">
-            <div class="modal-header">
-                <h5 class="modal-title" id="noResultsModalLabel"><i class="bi bi-x-circle"></i> نتیجه‌ای یافت نشد</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
-            </div>
-            <div class="modal-body">
-                نامی که وارد کرده‌اید در سوابق وجود ندارد.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-
-<script src="./script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+        <script src="./script.js"></script>
 </body>
+
 </html>
