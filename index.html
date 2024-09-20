@@ -168,7 +168,6 @@
         }
 
         .custom-card-title .bi {
-            margin-right: 10px;
             color: #007bff;
         }
 
@@ -387,17 +386,17 @@
         <div class="container my-4">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active fw-bold" id="hamid-tab" data-bs-toggle="tab" href="#hamid" role="tab"
+                    <a class="nav-link active fw-bold" id="Search-tab" data-bs-toggle="tab" href="#Search" role="tab"
                         aria-controls="hamid" aria-selected="true">جستجو</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-bold" id="walid-tab" data-bs-toggle="tab" href="#walid" role="tab"
+                    <a class="nav-link fw-bold" id="Form-tab" data-bs-toggle="tab" href="#Form" role="tab"
                         aria-controls="walid" aria-selected="false">ثبت نام</a>
                 </li>
             </ul>
             </div>
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="hamid" role="tabpanel" aria-labelledby="hamid-tab">
+                <div class="tab-pane fade show active" id="Search" role="tabpanel" aria-labelledby="Search-tab">
                     <section class=" my-4">
                         <div class="container">
                             <div class="row">
@@ -419,7 +418,7 @@
                         </div>
                     </section>
                 </div>
-                <div class="tab-pane fade" id="walid" role="tabpanel" aria-labelledby="walid-tab">
+                <div class="tab-pane fade" id="Form" role="tabpanel" aria-labelledby="Form-tab">
                     <section class="my-4">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -432,68 +431,58 @@
                                                     <label for="name" class="form-label form-label-custom">اسم</label>
                                                     <input type="text" class="form-control form-control-custom" id="name" placeholder="اسم خود را وارد کنید">
                                                 </div>
-                        
+                    
                                                 <div class="mb-3">
                                                     <label for="faName" class="form-label form-label-custom">نام پدر</label>
                                                     <input type="text" class="form-control form-control-custom" id="faName" placeholder="نام پدر خود را وارد کنید">
                                                 </div>
-                        
+                    
                                                 <div class="mb-3">
                                                     <label for="model" class="form-label form-label-custom">مدل موبایل</label>
                                                     <input type="text" class="form-control form-control-custom" id="model" placeholder="مدل موبایل را وارد کنید">
                                                 </div>
-                        
+                    
                                                 <div class="mb-3">
                                                     <label for="serial1" class="form-label form-label-custom">سریال نمبر ۱</label>
-                                                    <input type="text" class="form-control form-control-custom" id="serial1" placeholder="سریال نمبر ۱ را وارد کنید">
+                                                    <input type="number" class="form-control form-control-custom" id="serial1" placeholder="سریال نمبر ۱ را وارد کنید">
                                                 </div>
-                        
+                    
                                                 <div class="mb-3">
                                                     <label for="serial2" class="form-label form-label-custom">سریال نمبر ۲</label>
-                                                    <input type="text" class="form-control form-control-custom" id="serial2" placeholder="سریال نمبر ۲ را وارد کنید">
+                                                    <input type="number" class="form-control form-control-custom" id="serial2" placeholder="سریال نمبر ۲ را وارد کنید">
                                                 </div>
-                        
+                    
                                                 <div class="mb-3">
                                                     <label for="idNumber" class="form-label form-label-custom">نمبر تذکره</label>
-                                                    <input type="text" class="form-control form-control-custom" id="idNumber" placeholder="نمبر تذکره را وارد کنید">
+                                                    <input type="number" class="form-control form-control-custom" id="idNumber" placeholder="نمبر تذکره را وارد کنید">
                                                 </div>
-                        
-                                                <div class="mb-3">
-                                                    <label for="idPhoto" class="form-label form-label-custom">عکس تذکره</label>
-                                                    <input type="file" class="form-control form-control-custom" id="idPhoto">
-                                                </div>
-                        
-                                                <div class="mb-3">
-                                                    <label for="personPhoto" class="form-label form-label-custom">عکس شخص</label>
-                                                    <input type="file" class="form-control form-control-custom" id="personPhoto">
-                                                </div>
-                        
+                    
                                                 <div class="mb-3">
                                                     <label for="contactNumber" class="form-label form-label-custom">نمبر تماس</label>
-                                                    <input type="text" class="form-control form-control-custom" id="contactNumber" placeholder="نمبر تماس را وارد کنید">
+                                                    <input type="number" class="form-control form-control-custom" id="contactNumber" placeholder="نمبر تماس را وارد کنید">
                                                 </div>
-                        
+                    
                                                 <div class="mb-3">
                                                     <label for="warrantyContact" class="form-label form-label-custom">نمبر تماس ضمانتی</label>
-                                                    <input type="text" class="form-control form-control-custom" id="warrantyContact" placeholder="نمبر تماس ضمانتی را وارد کنید">
+                                                    <input type="number" class="form-control form-control-custom" id="warrantyContact" placeholder="نمبر تماس ضمانتی را وارد کنید">
                                                 </div>
-                        
+                    
                                                 <div class="mb-3">
                                                     <label for="currentAddress" class="form-label form-label-custom">سکونت فعلی (ناحیه کوچه)</label>
                                                     <input type="text" class="form-control form-control-custom" id="currentAddress" placeholder="سکونت فعلی را وارد کنید">
                                                 </div>
-                        
+                    
                                                 <div class="mb-3">
                                                     <label for="purchasePrice" class="form-label form-label-custom">قیمت خرید</label>
                                                     <input type="number" class="form-control form-control-custom" id="purchasePrice" placeholder="قیمت خرید را وارد کنید">
                                                 </div>
-                        
+                    
                                                 <div class="mb-3">
                                                     <label for="purchaseDate" class="form-label form-label-custom">تاریخ خرید</label>
                                                     <input type="date" class="form-control form-control-custom" id="purchaseDate">
                                                 </div>
-                        
-                                                <button type="submit" class="btn btn-custom w-100">ثبت</button>
+                    
+                                                <button type="submit" class="btn btn-primary-custom w-100">ثبت</button>
                                             </form>
                                         </div>
                                     </div>
@@ -501,8 +490,53 @@
                             </div>
                         </div>
                     </section>
-            </div>
-
+                    
+                    <!-- Toast های جداگانه برای هر ارور -->
+                    <div aria-live="polite" aria-atomic="true" class="position-relative">
+                        <div class="toast-container position-fixed top-0 end-0 p-3">
+                            <!-- Toast برای سریال نمبر -->
+                            <div id="serialErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-header">
+                                    <strong class="m-auto text-danger">خطای سریال نمبر</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body">
+                                    سریال نمبر باید حداقل ۱۵ عدد باشد.
+                                </div>
+                            </div>
+                            <!-- Toast برای نمبر تماس -->
+                            <div id="contactErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-header">
+                                    <strong class="m-auto text-danger">خطای نمبر تماس</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body">
+                                    نمبر تماس باید حداقل ۱۰ عدد باشد.
+                                </div>
+                            </div>
+                            <!-- Toast برای نمبر تذکره -->
+                            <div id="idNumberErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-header">
+                                    <strong class="m-auto text-danger">خطای نمبر تذکره</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body">
+                                    نمبر تذکره فقط شامل اعداد باشد.
+                                </div>
+                            </div>
+                            <!-- Toast برای فیلدهای خالی -->
+                            <div id="emptyFieldsToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-header">
+                                    <strong class="m-auto text-danger">خطای فیلد خالی</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body">
+                                    تمام فیلدها باید پر شوند.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
 
         <div id="loader" class="d-none text-center">
             <div class="spinner-border" role="status">
