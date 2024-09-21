@@ -1,40 +1,44 @@
-
 const result = document.getElementById("result");
 const btn = document.querySelector(".btn-search-custom");
 const input = document.getElementById("IMEI");
 const loader = document.getElementById("loader");
 const alertContainer = document.getElementById("alert-container");
-let allUsers = [];
 
-const createCardElement = (id, name, username, email, phone, photo) => {
+const createCardElement = (data) => {
     const cardDiv = document.createElement("div");
     cardDiv.className = "card custom-card";
     cardDiv.innerHTML = `
-    <div class="custom-card-body d-flex flex-column align-items-start justify-content-start">
-        <h5 class="custom-card-title"><i class="bi bi-person"></i> ${name}</h5>
-        <p class="custom-card-text"><i class="bi bi-person-badge"></i> شناسه: ${id}</p>
-        <p class="custom-card-text"><i class="bi bi-people"></i> نام کاربری: ${username}</p>
-        <p class="custom-card-text"><i class="bi bi-envelope"></i> ایمیل: ${email}</p>
-        <p class="custom-card-text"><i class="bi bi-telephone"></i> تلفن: ${phone}</p>
-    </div>
-    <div class="custom-card-footer">
-        <button type="button" class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modal${id}"> بیشتر <i class="bi bi-info-circle"></i></button>
-    </div>
-    <div class="modal fade" id="modal${id}" tabindex="-1" aria-labelledby="modalLabel${id}" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content modal-content-custom">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel${id}">شهر</h5>
-                </div>
-                <div class="modal-body">
-                    <p>${photo}</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> </button>
+        <div class="custom-card-body d-flex flex-column align-items-start justify-content-start">
+            <h5 class="custom-card-title"><i class="bi bi-person icon-custom"></i> ${data.name}</h5>
+            <p class="custom-card-text"><i class="bi bi-device-phone icon-custom"></i> مدل: ${data.model}</p>
+            <p class="custom-card-text"><i class="bi bi-barcode icon-custom"></i> شماره سریال: ${data.serial1}</p>
+            <p class="custom-card-text"><i class="bi bi-telephone icon-custom"></i> شماره تماس: ${data.contactNumber}</p>
+            <p class="custom-card-text"><i class="bi bi-house icon-custom"></i> آدرس: ${data.currentAddress}</p>
+        </div>
+        <div class="custom-card-footer">
+            <button type="button" class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modal${data.idNumber}"> بیشتر <i class="bi bi-info-circle"></i></button>
+        </div>
+        <div class="modal fade" id="modal${data.idNumber}" tabindex="-1" aria-labelledby="modalLabel${data.idNumber}" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-content-custom">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel${data.idNumber}"><i class="bi bi-info-circle mx-2"></i> اطلاعات بیشتر</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p><i class="bi bi-person icon-custom"></i> <strong>نام:</strong> ${data.name}</p>
+                        <p><i class="bi bi-card-text icon-custom"></i> <strong>شناسه:</strong> ${data.idNumber}</p>
+                        <p><i class="bi bi-device-phone icon-custom"></i> <strong>مدل:</strong> ${data.model}</p>
+                        <p><i class="bi bi-calendar icon-custom"></i> <strong>تاریخ خرید:</strong> ${data.purchaseDate}</p>
+                        <p><i class="bi bi-house icon-custom"></i> <strong>آدرس:</strong> ${data.currentAddress}</p>
+                        <p><i class="bi bi-telephone icon-custom"></i> <strong>شماره تماس:</strong> ${data.contactNumber}</p>
+                        <p><i class="bi bi-shield-lock icon-custom"></i> <strong>شماره ضمانت:</strong> ${data.warrantyContact}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> بستن</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     `;
     return cardDiv;
 };
@@ -61,27 +65,22 @@ const hideAlert = () => {
     alertContainer.innerHTML = "";
 };
 
-const displayUsers = (users) => {
+const displayUsers = () => {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
     result.innerHTML = "";
     const cardCount = document.getElementById("card-count");
     cardCount.textContent = `تعداد موبایل ${users.length}`;
+
     for (let i = 0; i < users.length; i++) {
-        const user = users[i];
-        result.appendChild(
-            createCardElement(
-                user.id,
-                user.name,
-                user.username,
-                user.email,
-                user.phone,
-                user.address.city
-            )
-        );
+        result.appendChild(createCardElement(users[i]));
     }
+
+    hideLoader();
 };
 
 const filterUsersByName = (name) => {
-    return allUsers.filter((user) =>
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    return users.filter((user) =>
         user.name.toLowerCase().includes(name.toLowerCase())
     );
 };
@@ -99,7 +98,10 @@ btn.addEventListener("click", function () {
     hideAlert();
     const filteredUsers = filterUsersByName(searchName);
     if (filteredUsers.length > 0) {
-        displayUsers(filteredUsers);
+        result.innerHTML = "";
+        for (let i = 0; i < filteredUsers.length; i++) {
+            result.appendChild(createCardElement(filteredUsers[i]));
+        }
         hideLoader();
     } else {
         hideLoader();
@@ -107,89 +109,70 @@ btn.addEventListener("click", function () {
     }
 });
 
-showLoader();
-fetch("https://jsonplaceholder.typicode.com/users")
-    .then((response) => {
-        if (!response.ok) {
-            if (response.status >= 500) {
-                throw new Error("خطای سرور");
-            } else if (response.status >= 400) {
-                throw new Error("خطای مشتری");
-            }
-        }
-        return response.json();
-    })
-    .then((data) => {
-        allUsers = data;
-        displayUsers(data);
-        hideLoader();
-    })
-    .catch((error) => {
-        hideLoader();
-        if (error.message === "خطای سرور") {
-            showAlert("اطلاعات دریافت نشد. لطفاً دوباره تلاش کنید.", "danger");
-        } else if (error.message === "خطای مشتری") {
-            showAlert("اتصال اینترنت ضعیف است.", "warning");
-        } else {
-            showAlert("مشکل ناشناخته‌ای رخ داده است.", "danger");
-        }
-    });
+document.addEventListener("DOMContentLoaded", () => {
+    displayUsers();
+});
 
-    let form = document.querySelector('form');
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
+let form = document.querySelector('form');
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-        const name = document.getElementById('name').value.trim();
-        const faName = document.getElementById('faName').value.trim();
-        const model = document.getElementById('model').value.trim();
-        const serial1 = document.getElementById('serial1').value.trim();
-        const serial2 = document.getElementById('serial2').value.trim();
-        const idNumber = document.getElementById('idNumber').value.trim();
-        const contactNumber = document.getElementById('contactNumber').value.trim();
-        const warrantyContact = document.getElementById('warrantyContact').value.trim();
-        const currentAddress = document.getElementById('currentAddress').value.trim();
-        const purchasePrice = document.getElementById('purchasePrice').value.trim();
-        const purchaseDate = document.getElementById('purchaseDate').value.trim();
+    const userData = {
+        name: document.getElementById('name').value.trim(),
+        faName: document.getElementById('faName').value.trim(),
+        model: document.getElementById('model').value.trim(),
+        serial1: document.getElementById('serial1').value.trim(),
+        serial2: document.getElementById('serial2').value.trim(),
+        idNumber: document.getElementById('idNumber').value.trim(),
+        contactNumber: document.getElementById('contactNumber').value.trim(),
+        warrantyContact: document.getElementById('warrantyContact').value.trim(),
+        currentAddress: document.getElementById('currentAddress').value.trim(),
+        purchasePrice: document.getElementById('purchasePrice').value.trim(),
+        purchaseDate: document.getElementById('purchaseDate').value.trim(),
+    };
 
-        const serialPattern = /^[0-9]{15,}$/; 
-        const phonePattern = /^[0-9]{10,}$/;   
+    const serialPattern = /^[0-9]{15,}$/; 
+    const phonePattern = /^[0-9]{10,}$/;   
+    let isValid = true;
 
-        let isValid = true;
-
-     
-        if (!name || !faName || !model || !serial1 || !serial2 || !idNumber || !contactNumber || !warrantyContact || !currentAddress || !purchasePrice || !purchaseDate) {
+    for (const key in userData) {
+        if (!userData[key]) {
+            isValid = false;
             const toastElement = document.getElementById('emptyFieldsToast');
             const toast = new bootstrap.Toast(toastElement);
             toast.show();
-            isValid = false;
+            break;
         }
+    }
 
-  
-        if (!serial1.match(serialPattern) || !serial2.match(serialPattern)) {
-            const toastElement = document.getElementById('serialErrorToast');
-            const toast = new bootstrap.Toast(toastElement);
-            toast.show();
-            isValid = false;
-        }
+    if (!userData.serial1.match(serialPattern) || !userData.serial2.match(serialPattern)) {
+        isValid = false;
+        const toastElement = document.getElementById('serialErrorToast');
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+    }
 
+    if (!userData.contactNumber.match(phonePattern) || !userData.warrantyContact.match(phonePattern)) {
+        isValid = false;
+        const toastElement = document.getElementById('contactErrorToast');
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+    }
 
-        if (!contactNumber.match(phonePattern) || !warrantyContact.match(phonePattern)) {
-            const toastElement = document.getElementById('contactErrorToast');
-            const toast = new bootstrap.Toast(toastElement);
-            toast.show();
-            isValid = false;
-        }
+    if (!userData.idNumber.match(/^[0-9]+$/)) {
+        isValid = false;
+        const toastElement = document.getElementById('idNumberErrorToast');
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+    }
 
-  
-        if (!idNumber.match(/^[0-9]+$/)) {
-            const toastElement = document.getElementById('idNumberErrorToast');
-            const toast = new bootstrap.Toast(toastElement);
-            toast.show();
-            isValid = false;
-        }
+    if (isValid) {
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        users.push(userData);
+        localStorage.setItem("users", JSON.stringify(users));
 
-
-        if (isValid) {
-            this.submit();
-        }
-    });
+        displayUsers();
+        form.reset();
+        hideLoader();
+    }
+});
