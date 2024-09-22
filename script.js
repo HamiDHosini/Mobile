@@ -4,14 +4,20 @@ const input = document.getElementById("IMEI");
 const loader = document.getElementById("loader");
 const alertContainer = document.getElementById("alert-container");
 
+const showToast = (toastId) => {
+    const toastElement = document.getElementById(toastId);
+    const toast = new bootstrap.Toast(toastElement);
+    toast.show();
+};
+
 const createCardElement = (data) => {
     const cardDiv = document.createElement("div");
     cardDiv.className = "card custom-card";
     cardDiv.innerHTML = `
         <div class="custom-card-body d-flex flex-column align-items-start justify-content-start">
             <h5 class="custom-card-title"><i class="bi bi-person icon-custom"></i> ${data.name}</h5>
-            <p class="custom-card-text"><i class="bi bi-device-phone icon-custom"></i> مدل: ${data.model}</p>
-            <p class="custom-card-text"><i class="bi bi-barcode icon-custom"></i> شماره سریال: ${data.serial1}</p>
+            <p class="custom-card-text"><i class="bi bi-phone icon-custom"></i> مدل: ${data.model}</p>
+            <p class="custom-card-text"><i class="bi bi-hash icon-custom"></i> شماره سریال: ${data.serial1}</p>
             <p class="custom-card-text"><i class="bi bi-telephone icon-custom"></i> شماره تماس: ${data.contactNumber}</p>
             <p class="custom-card-text"><i class="bi bi-house icon-custom"></i> آدرس: ${data.currentAddress}</p>
         </div>
@@ -27,7 +33,7 @@ const createCardElement = (data) => {
                     <div class="modal-body">
                         <p><i class="bi bi-person icon-custom"></i> <strong>نام:</strong> ${data.name}</p>
                         <p><i class="bi bi-card-text icon-custom"></i> <strong>شناسه:</strong> ${data.idNumber}</p>
-                        <p><i class="bi bi-device-phone icon-custom"></i> <strong>مدل:</strong> ${data.model}</p>
+                        <p><i class="bi bi-phone icon-custom"></i> <strong>مدل:</strong> ${data.model}</p>
                         <p><i class="bi bi-calendar icon-custom"></i> <strong>تاریخ خرید:</strong> ${data.purchaseDate}</p>
                         <p><i class="bi bi-house icon-custom"></i> <strong>آدرس:</strong> ${data.currentAddress}</p>
                         <p><i class="bi bi-telephone icon-custom"></i> <strong>شماره تماس:</strong> ${data.contactNumber}</p>
@@ -78,25 +84,27 @@ const displayUsers = () => {
     hideLoader();
 };
 
-const filterUsersByName = (name) => {
+const filterUsersByQuery = (query) => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
     return users.filter((user) =>
-        user.name.toLowerCase().includes(name.toLowerCase())
+        user.name.toLowerCase().includes(query.toLowerCase()) ||
+        user.serial1.includes(query) ||
+        user.contactNumber.includes(query)
     );
 };
 
 btn.addEventListener("click", function () {
     showLoader();
-    const searchName = input.value.trim();
+    const searchQuery = input.value.trim();
 
-    if (searchName === "") {
+    if (searchQuery === "") {
         hideLoader();
         showAlert("فیلد جستجو نمی‌تواند خالی باشد.", "danger");
         return;
     }
 
     hideAlert();
-    const filteredUsers = filterUsersByName(searchName);
+    const filteredUsers = filterUsersByQuery(searchQuery);
     if (filteredUsers.length > 0) {
         result.innerHTML = "";
         for (let i = 0; i < filteredUsers.length; i++) {
@@ -138,41 +146,41 @@ form.addEventListener('submit', function (e) {
     for (const key in userData) {
         if (!userData[key]) {
             isValid = false;
-            const toastElement = document.getElementById('emptyFieldsToast');
-            const toast = new bootstrap.Toast(toastElement);
-            toast.show();
+            showToast('emptyFieldsToast');
             break;
         }
     }
 
     if (!userData.serial1.match(serialPattern) || !userData.serial2.match(serialPattern)) {
         isValid = false;
-        const toastElement = document.getElementById('serialErrorToast');
-        const toast = new bootstrap.Toast(toastElement);
-        toast.show();
+        showToast('serialErrorToast');
     }
 
     if (!userData.contactNumber.match(phonePattern) || !userData.warrantyContact.match(phonePattern)) {
         isValid = false;
-        const toastElement = document.getElementById('contactErrorToast');
-        const toast = new bootstrap.Toast(toastElement);
-        toast.show();
+        showToast('contactErrorToast');
     }
 
     if (!userData.idNumber.match(/^[0-9]+$/)) {
         isValid = false;
-        const toastElement = document.getElementById('idNumberErrorToast');
-        const toast = new bootstrap.Toast(toastElement);
-        toast.show();
+        showToast('idNumberErrorToast');
+    }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const isDuplicate = users.some(user => user.serial1 === userData.serial1);
+    if (isDuplicate) {
+        isValid = false;
+        showToast('duplicateSerialToast');
     }
 
     if (isValid) {
-        const users = JSON.parse(localStorage.getItem("users")) || [];
         users.push(userData);
         localStorage.setItem("users", JSON.stringify(users));
 
         displayUsers();
         form.reset();
         hideLoader();
+
+        showAlert("کاربر با موفقیت اضافه شد.", "success");
     }
 });
